@@ -10,6 +10,7 @@ import { motion } from "framer-motion"
 import { NewProjectSlot } from "@/components/new-project-slot"
 import { Sidebar, type DashboardView } from "@/components/sidebar"
 import { JudgesView, ReportsView, SecurityView, StorageView } from "@/components/insight-views"
+import { AuditLogView } from "@/components/audit-log-view"
 import { SubmissionModal } from "@/components/submission-modal"
 import { createClient } from "@/lib/supabase/client"
 import { canManageProject, canOpenView, canSubmitProject, isReviewer } from "@/lib/permissions"
@@ -267,6 +268,8 @@ export default function ClipsPage() {
               <JudgesView />
             ) : activeView === "storage" && canOpenView(role, "storage") ? (
               <StorageView projects={allProjects} />
+            ) : activeView === "audit" && canOpenView(role, "audit") ? (
+              <AuditLogView />
             ) : (
               <ReportsView projects={allProjects} audience={isApplicant ? "applicant" : "reviewer"} />
             )}

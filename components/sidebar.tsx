@@ -12,6 +12,7 @@ import {
   LayoutDashboard,
   LogOut,
   ShieldCheck,
+  ScrollText,
   Upload,
   Users,
   type LucideIcon,
@@ -60,7 +61,10 @@ const infrastructureGroup: NavGroup = {
 
 const adminGroup: NavGroup = {
   label: "ADMIN",
-  items: [{ label: "Judges", view: "judges", icon: Users }],
+  items: [
+    { label: "Judges", view: "judges", icon: Users },
+    { label: "Audit trail", view: "audit", icon: ScrollText },
+  ],
 }
 
 export function navigationGroupsForRole(role?: AppRole): NavGroup[] {
@@ -69,7 +73,7 @@ export function navigationGroupsForRole(role?: AppRole): NavGroup[] {
   const candidates: NavGroup[] = [
     ...groups,
     ...(allowed.includes("storage") ? [infrastructureGroup] : []),
-    ...(allowed.includes("judges") ? [adminGroup] : []),
+    ...(allowed.includes("judges") || allowed.includes("audit") ? [adminGroup] : []),
   ]
   return candidates
     .map((group) => ({ ...group, items: group.items.filter((item) => allowed.includes(item.view)) }))

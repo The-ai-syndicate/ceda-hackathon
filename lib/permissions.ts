@@ -6,7 +6,7 @@ import type { AppRole } from "@/lib/supabase/auth-context"
  * dashboard actions, repository tabs) so an applicant never lands on the
  * reviewer surfaces by URL or by stale state.
  */
-export type DashboardView = "projects" | "reports" | "security" | "storage" | "judges"
+export type DashboardView = "projects" | "reports" | "security" | "storage" | "judges" | "audit"
 
 export type ViewerRole = AppRole | null | undefined
 
@@ -66,8 +66,17 @@ export function canViewProject(role: ViewerRole, userId: string | null | undefin
 }
 
 /** Views each role may open. Applicants get an applicant-only dashboard. */
+/**
+ * The audit trail reveals judge activity, applicant identities, and failed
+ * sign-in attempts (with IPs). It is administrator-only, in the UI and at the
+ * route, so no reviewer or applicant can read it by deep-linking.
+ */
+export function canViewAuditTrail(role: ViewerRole) {
+  return role === "admin"
+}
+
 export function viewsForRole(role: ViewerRole): DashboardView[] {
-  if (role === "admin") return ["projects", "reports", "security", "storage", "judges"]
+  if (role === "admin") return ["projects", "reports", "security", "storage", "judges", "audit"]
   if (role === "judge") return ["projects", "reports", "security"]
   return ["projects", "reports"]
 }
