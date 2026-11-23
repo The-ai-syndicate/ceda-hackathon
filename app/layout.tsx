@@ -15,11 +15,13 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "/ceda-icon.svg",
-        type: "image/svg+xml",
+        url: "/logo-mark.png",
+        type: "image/png",
+        sizes: "512x512",
       },
     ],
-    apple: "/ceda-icon.svg",
+    shortcut: "/logo-mark.png",
+    apple: "/logo-mark.png",
   },
 }
 

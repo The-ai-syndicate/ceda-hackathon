@@ -119,7 +119,7 @@ function Brand() {
   return (
     <div className="flex min-w-0 items-center gap-3">
       <div className="flex size-9 shrink-0 items-center justify-center rounded-xl overflow-hidden border border-[#E7DED1] bg-[#FAF7F2]">
-        <Image src="/ceda-icon.svg" alt="CEDA" width={28} height={28} className="size-7" priority />
+        <Image src="/logo-mark.png" alt="CEDA" width={28} height={28} className="size-7 object-contain" priority />
       </div>
       <div className="min-w-0">
         <p className="text-[14px] font-semibold tracking-[-0.02em] text-[#2A2118]">CEDA</p>

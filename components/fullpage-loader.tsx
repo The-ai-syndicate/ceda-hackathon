@@ -56,8 +56,15 @@ export function FullpageLoader({ duration = 1600, onComplete }: FullpageLoaderPr
         }}
       >
         <div className="flex flex-col items-center">
-          <div className="mb-6 flex size-16 items-center justify-center rounded-2xl border border-[#E7DED1] bg-white overflow-hidden shadow-lg">
-            <Image src="/ceda-icon.svg" alt="CEDA" width={48} height={48} className="size-12" priority />
+          <div className="mb-6 flex h-16 w-24 items-center justify-center rounded-2xl border border-[#E7DED1] bg-white overflow-hidden shadow-lg">
+            <Image
+              src="/logo-lockup.png"
+              alt="CEDA"
+              width={281}
+              height={167}
+              className="h-11 w-auto object-contain"
+              priority
+            />
           </div>
           <h1 className="font-semibold tracking-tight text-[#2A2118] text-2xl">CEDA Hackathon</h1>
           <p className="mt-1 text-[11px] text-[#8C7B6A] tracking-[0.18em] uppercase">Finance · Develop · Sustain</p>
