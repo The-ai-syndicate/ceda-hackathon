@@ -146,7 +146,7 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
       <div className="w-full max-w-[420px]">
         <Link href="/login" className="mb-8 flex items-center gap-3" aria-label="CEDA judging portal home">
           <span className="flex size-11 items-center justify-center overflow-hidden rounded-xl border border-[#E7DED1] bg-white">
-            <Image src="/ceda-icon.svg" alt="CEDA" width={32} height={32} className="size-8" priority />
+            <Image src="/logo-mark.png" alt="CEDA" width={32} height={32} className="size-8 object-contain" priority />
           </span>
           <span><span className="block text-sm font-semibold text-[#2A2118]">CEDA</span><span className="block text-[11px] text-[#8C7B6A]">Hackathon judging portal</span></span>
         </Link>

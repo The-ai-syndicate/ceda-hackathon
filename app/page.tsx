@@ -42,6 +42,7 @@ export default function ClipsPage() {
   const [isAnalyzing, setIsAnalyzing] = useState(false)
   const [activeView, setActiveView] = useState<DashboardView>("projects")
   const [submissionOpen, setSubmissionOpen] = useState(false)
+  const [pendingArchive, setPendingArchive] = useState<File | null>(null)
   const animatingRef = useRef(false)
   const [showContent, setShowContent] = useState(false)
   const mainRef = useRef<HTMLElement>(null)
@@ -101,7 +102,9 @@ export default function ClipsPage() {
   }, [newProjects, projects])
 
   const handleProjectUpload = useCallback((file: File) => {
-    void file
+    // Opening the modal is the primary action, exactly like the header button.
+    // Any ZIP already picked on the card is handed to the modal instead of lost.
+    setPendingArchive(/\.zip$/i.test(file.name) ? file : null)
     setSubmissionOpen(true)
   }, [])
 
@@ -171,7 +174,12 @@ export default function ClipsPage() {
 
       <Sidebar activeView={activeView} onNavigate={setActiveView} projectCount={allProjects.length} userRole={role} userEmail={userProfile?.email || undefined} />
 
-      <SubmissionModal open={submissionOpen} onClose={() => setSubmissionOpen(false)} onSubmitted={handleSubmissionSubmitted} />
+      <SubmissionModal
+        open={submissionOpen}
+        onClose={() => { setSubmissionOpen(false); setPendingArchive(null) }}
+        onSubmitted={handleSubmissionSubmitted}
+        initialArchive={pendingArchive}
+      />
 
       <div
         className="transition-all duration-700 ease-out"
@@ -209,7 +217,7 @@ export default function ClipsPage() {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.3, delay: 0.05, ease: [0.32, 0.72, 0, 1] }}
                 >
-                  <NewProjectSlot onFileSelected={handleProjectUpload} isAnalyzing={isAnalyzing} />
+                  <NewProjectSlot onFileSelected={handleProjectUpload} onOpen={() => { setPendingArchive(null); setSubmissionOpen(true) }} isAnalyzing={isAnalyzing} />
                 </motion.div>
               )}
               {allProjects.length === 0 && (

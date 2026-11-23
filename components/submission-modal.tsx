@@ -25,6 +25,8 @@ interface SubmissionModalProps {
   open: boolean
   onClose: () => void
   onSubmitted: (project: Project) => void
+  /** A ZIP the applicant picked before opening the modal; seeds the source-code field. */
+  initialArchive?: File | null
 }
 
 const CHECKLIST: Array<{ field: SubmissionField; label: string; required: true }> = [
@@ -36,7 +38,7 @@ const CHECKLIST: Array<{ field: SubmissionField; label: string; required: true }
   { field: "declaration", label: "Declaration", required: true },
 ]
 
-export function SubmissionModal({ open, onClose, onSubmitted }: SubmissionModalProps) {
+export function SubmissionModal({ open, onClose, onSubmitted, initialArchive = null }: SubmissionModalProps) {
   const [title, setTitle] = useState("")
   const [summary, setSummary] = useState("")
   const [screenshots, setScreenshots] = useState<File[]>([])
@@ -63,8 +65,20 @@ export function SubmissionModal({ open, onClose, onSubmitted }: SubmissionModalP
       setShowErrors(false)
       setStage("idle")
       setError("")
+      return
     }
-  }, [open])
+    // Carry a ZIP the applicant chose from the dashboard upload card straight
+    // into the source-code field, so they are not asked to pick it twice.
+    if (initialArchive) {
+      if (!/\.zip$/i.test(initialArchive.name)) {
+        setError("The source archive must be a .zip file. Export your project folder as a ZIP and try again.")
+      } else if (initialArchive.size > SUBMISSION_LIMITS.archiveMaxBytes) {
+        setError(`The source archive must be ${Math.round(SUBMISSION_LIMITS.archiveMaxBytes / (1024 * 1024))} MB or smaller.`)
+      } else {
+        setArchive(initialArchive)
+      }
+    }
+  }, [open, initialArchive])
 
   const draft = useMemo(
     () => ({

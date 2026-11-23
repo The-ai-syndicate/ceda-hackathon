@@ -4,15 +4,17 @@ import { useState, useEffect, useRef } from "react"
 
 interface NewProjectSlotProps {
   onFileSelected: (file: File) => void
+  /** Opens the submission modal directly, matching the "Upload project" button. */
+  onOpen?: () => void
   isAnalyzing?: boolean
 }
 
-export function NewProjectSlot({ onFileSelected, isAnalyzing = false }: NewProjectSlotProps) {
+export function NewProjectSlot({ onFileSelected, onOpen, isAnalyzing = false }: NewProjectSlotProps) {
   const [isHovered, setIsHovered] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [displayedText, setDisplayedText] = useState("")
   const [isTypingComplete, setIsTypingComplete] = useState(false)
-  const fullText = isAnalyzing ? "Checking ZIP integrity, source and dependencies..." : "ZIP saved privately in R2; analysed by the CEDA review engine..."
+  const fullText = isAnalyzing ? "Checking ZIP integrity, source and dependencies..." : "Open the submission form to add your idea, screenshots and source ZIP..."
 
   useEffect(() => {
     if (isHovered) {
@@ -40,12 +42,12 @@ export function NewProjectSlot({ onFileSelected, isAnalyzing = false }: NewProje
       className="group relative cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9961E]/50"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      onClick={(event) => { if (event.target !== fileInputRef.current && !isAnalyzing) fileInputRef.current?.click() }}
-      onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); if (!isAnalyzing) fileInputRef.current?.click() } }}
+      onClick={(event) => { if (event.target !== fileInputRef.current && !isAnalyzing) { if (onOpen) onOpen(); else fileInputRef.current?.click() } }}
+      onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); if (!isAnalyzing) { if (onOpen) onOpen(); else fileInputRef.current?.click() } } }}
       role="button"
       tabIndex={0}
-      aria-label="Upload a project ZIP"
-      aria-description="ZIP files are checked on the server and saved in a private R2 bucket. Redacted source excerpts and file metadata are processed by the CEDA review engine; resolved package names and versions from supported lockfiles are checked against OSV."
+      aria-label="Upload submission"
+      aria-description="Opens the secure submission form for your project title, summary, screenshots, documentation and optional source ZIP. The ZIP is checked on the server, saved in a private R2 bucket, and supported lockfile dependencies are checked against OSV."
       aria-busy={isAnalyzing}
       aria-disabled={isAnalyzing}
     >
