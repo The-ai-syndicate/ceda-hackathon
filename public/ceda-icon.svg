@@ -1,0 +1,33 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cedaBrownI" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8A3B2A"/>
+      <stop offset="100%" stop-color="#6E2C24"/>
+    </linearGradient>
+    <linearGradient id="cedaOrangeI" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#D4712E"/>
+      <stop offset="100%" stop-color="#B85621"/>
+    </linearGradient>
+    <linearGradient id="cedaGoldI" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E0B33A"/>
+      <stop offset="100%" stop-color="#C9961E"/>
+    </linearGradient>
+    <clipPath id="domeClipI">
+      <path d="M 20 130 A 70 70 0 0 1 160 130 Z"/>
+    </clipPath>
+  </defs>
+  <rect width="180" height="180" rx="38" fill="#FAF7F2"/>
+  <g clip-path="url(#domeClipI)">
+    <rect x="20" y="60" width="140" height="70" fill="url(#cedaBrownI)"/>
+    <path d="M 20 130 C 45 112, 58 92, 72 72 L 90 60 L 90 130 Z" fill="url(#cedaGoldI)"/>
+    <path d="M 90 60 L 108 72 C 122 92, 135 112, 160 130 L 90 130 Z" fill="url(#cedaOrangeI)"/>
+    <path d="M 20 130 C 33 118, 40 104, 47 86 L 60 68 L 74 82 C 68 98, 64 114, 60 130 Z" fill="url(#cedaBrownI)"/>
+    <path d="M 60 130 C 64 114, 68 98, 74 82 L 86 66 C 92 82, 94 104, 94 130 Z" fill="url(#cedaGoldI)"/>
+    <path d="M 94 130 C 94 104, 96 82, 102 66 L 116 82 C 122 98, 126 114, 130 130 Z" fill="url(#cedaOrangeI)"/>
+    <path d="M 130 130 C 134 114, 143 96, 160 82 L 160 130 Z" fill="url(#cedaGoldI)"/>
+  </g>
+  <path d="M 20 130 A 70 70 0 0 1 160 130" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M 60 130 C 64 114, 68 98, 74 82 L 86 66" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 94 130 C 94 104, 96 82, 102 66 L 116 82" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 130 130 C 134 114, 143 96, 160 82" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+</svg>
